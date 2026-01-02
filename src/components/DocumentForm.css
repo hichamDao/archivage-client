@@ -1,0 +1,47 @@
+.doc-form-container {
+    text-align: center;
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 30px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    font-family: "Segoe UI", sans-serif;
+}
+
+.doc-form h2 {
+    color: #0070ba;
+    margin-bottom: 20px;
+}
+
+.doc-form input[type="text"],
+.doc-form input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1em;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.doc-form input:focus {
+    border-color: #00b4d8;
+}
+
+.doc-form button {
+    background: linear-gradient(90deg, #0070ba, #00b4d8);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.doc-form button:hover {
+    background: linear-gradient(90deg, #005b9a, #009dc7);
+    transform: scale(1.03);
+}

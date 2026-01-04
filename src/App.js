@@ -23,7 +23,7 @@ function AppRoutes() {
             <Navbar />
             <Routes>
                 <Route path="/" element={<Navigate to={user ? "/dashboard" : "/login"} />} />
-                <Route path="/" element={<Home />} />
+                <Route path="/home" element={<Home />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/login" />} />

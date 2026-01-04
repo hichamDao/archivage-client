@@ -6,9 +6,12 @@ import API from "../api";
 function Dashboard() {
     const [documents, setDocuments] = useState([]);
     const [loadingPayment, setLoadingPayment] = useState(false);
-    const user = JSON.parse(localStorage.getItem("user"));
+    const [user] = useState(() => JSON.parse(localStorage.getItem("user")));
+    //const user = JSON.parse(localStorage.getItem("user"));
 
     useEffect(() => {
+        if (!user) return;
+
         const fetchDocuments = async () => {
             try {
                 const res = await API.get(`/documents/list/${user.id}`);
@@ -17,8 +20,9 @@ function Dashboard() {
                 console.error("Erreur lors du chargement des documents :", error);
             }
         };
-        if (user) fetchDocuments();
-    }, [user]);
+
+        fetchDocuments();
+    }, [user.id]); // stable car user ne change plus
 
 
     const handleDownload = (doc) => {

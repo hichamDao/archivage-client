@@ -2,6 +2,7 @@
 import React, { useContext } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, AuthContext } from "./context/AuthContext";
+import Home from "./components/Home";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
@@ -9,6 +10,7 @@ import Success from "./components/Success" ;
 import Cancel from "./components/Cancel";
 import Navbar from "./components/Navbar";
 import DocumentForm from "./components/DocumentForm";
+
 
 
 function AppRoutes() {
@@ -21,6 +23,7 @@ function AppRoutes() {
             <Navbar />
             <Routes>
                 <Route path="/" element={<Navigate to={user ? "/dashboard" : "/login"} />} />
+                <Route path="/" element={<Home />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/login" />} />

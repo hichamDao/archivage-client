@@ -10,7 +10,7 @@ function Navbar() {
         <nav className="navbar">
             <div className="logo">🧠 Archivage AI</div>
             <ul className="nav-links">
-                <li><Link to="/">Accueil</Link></li>
+                <li><Link to="/e">Accueil</Link></li>
                 {user && <li><Link to="/dashboard">Mes Documents</Link></li>}
                 {user && <li><Link to="/create">Créer</Link></li>}
                 {user && <li><Link to="/payment">Paiement</Link></li>}

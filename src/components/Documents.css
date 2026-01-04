@@ -1,98 +1,69 @@
-.dashboard-container {
-    padding: 40px;
-    text-align: center;
-    background: #f9fafb;
-    min-height: 100vh;
+.dashboard-docs-container {
+    padding: 20px;
+    font-family: "Segoe UI", sans-serif;
 }
 
-.intro {
-    color: #475569;
-    margin-bottom: 30px;
-    font-size: 1.1rem;
-}
-
-/* ===== FORM ===== */
-.form-card {
-    background: white;
-    padding: 25px;
-    max-width: 600px;
-    margin: 0 auto 40px;
-    border-radius: 10px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-}
-
-.form-card input,
-.form-card textarea {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 15px;
-    border-radius: 6px;
-    border: 1px solid #cbd5e1;
-    font-size: 1rem;
-}
-
-.form-card button {
-    background: #2563eb;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-.form-card button:hover {
-    background: #1d4ed8;
-}
-
-/* ===== LIST ===== */
-.doc-list {
+.doc-upload-form {
     display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.doc-upload-form input,
+.doc-upload-form button {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.doc-upload-form button {
+    background-color: #0ea5e9;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.doc-filter {
+    margin-bottom: 20px;
+    padding: 8px;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.doc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 15px;
 }
 
 .doc-card {
-    background: white;
-    border-radius: 12px;
-    padding: 20px;
-    width: 320px;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
-    text-align: left;
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
-.doc-header {
+.doc-card-buttons {
+    margin-top: 10px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    gap: 10px;
 }
 
-.doc-content {
-    color: #475569;
-    margin: 10px 0;
-    font-size: 0.95rem;
-}
-
-.doc-actions {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.doc-actions button,
-.doc-actions a {
-    background: #0ea5e9;
-    color: white;
-    padding: 6px 10px;
+.doc-card-buttons button {
+    flex: 1;
+    padding: 6px;
+    border-radius: 5px;
     border: none;
-    border-radius: 6px;
-    text-decoration: none;
-    transition: background 0.3s;
-    font-size: 0.9rem;
+    cursor: pointer;
 }
 
-.doc-actions button:hover,
-.doc-actions a:hover {
-    background: #0284c7;
+.doc-card-buttons button:first-child {
+    background-color: #0ea5e9;
+    color: white;
+}
+
+.doc-card-buttons button:last-child {
+    background-color: #ef4444;
+    color: white;
 }

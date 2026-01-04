@@ -1,31 +1,44 @@
-import React, { useEffect, useState } from "react";
-import API from "../api";
+import React from "react";
+import "./Documents.css";
 
-function DocumentList() {
-    const [docs, setDocs] = useState([]);
-    const user = JSON.parse(localStorage.getItem("user"));
-
-    const loadDocs = async () => {
-        const res = await API.get(`/document/list?userId=${user.id}`);
-        setDocs(res.data);
-    };
-
-    useEffect(() => { loadDocs(); }, []);
-
-    const handleDelete = async id => {
-        await API.delete(`/document/delete/${id}`);
-        loadDocs();
+function DocumentList({ documents }) {
+    const downloadPDF = (doc) => {
+        const blob = new Blob([Uint8Array.from(atob(doc.file), (c) => c.charCodeAt(0))], {
+            type: "application/pdf",
+        });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = `${doc.title}.pdf`;
+        link.click();
     };
 
     return (
-        <div>
-            <h3>Mes documents</h3>
-            {docs.map(d => (
-                <div key={d.id}>
-                    <strong>{d.title}</strong> - {d.content}
-                    <button onClick={() => handleDelete(d.id)}>Supprimer</button>
-                </div>
-            ))}
+        <div className="doc-list">
+            {documents.length === 0 ? (
+                <p>Aucun document pour le moment.</p>
+            ) : (
+                documents.map((doc) => (
+                    <div key={doc.id} className="doc-card">
+                        <div className="doc-header">
+                            <h3>{doc.title}</h3>
+                            <span>{new Date(doc.createdAt).toLocaleDateString()}</span>
+                        </div>
+                        <p className="doc-content">
+                            {doc.content?.substring(0, 120) || "Aucun aperçu disponible..."}...
+                        </p>
+                        <div className="doc-actions">
+                            <button onClick={() => downloadPDF(doc)}>📥 Télécharger</button>
+                            <a
+                                href={`data:application/pdf;base64,${doc.file}`}
+                                target="_blank"
+                                rel="noreferrer"
+                            >
+                                👁️ Voir PDF
+                            </a>
+                        </div>
+                    </div>
+                ))
+            )}
         </div>
     );
 }

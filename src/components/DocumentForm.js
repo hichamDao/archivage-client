@@ -1,39 +1,47 @@
 import React, { useState } from "react";
 import API from "../api";
-import "./DocumentForm.css";
+import "./Documents.css";
 
-function DocumentForm() {
-    const [documents, setDocuments] = useState([]);
-     const [file, setFile] = useState(null);
-     const [title, setTitle] = useState("");
+function DocumentForm({ onUpload }) {
+    const [title, setTitle] = useState("");
+    const [content, setContent] = useState("");
+    const [file, setFile] = useState(null);
+    const [loading, setLoading] = useState(false);
     const user = JSON.parse(localStorage.getItem("user"));
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!user) return alert("Veuillez vous connecter !");
+        if (!title || !file) return alert("Veuillez remplir tous les champs obligatoires");
 
         const formData = new FormData();
         formData.append("title", title);
-        formData.append("file", file);
+        formData.append("content", content);
         formData.append("userId", user.id);
+        formData.append("file", file);
 
         try {
-            const res = await API.post("/documents/upload", formData, {
+            setLoading(true);
+            await API.post("/documents/upload", formData, {
                 headers: { "Content-Type": "multipart/form-data" },
             });
-            alert("✅ Document ajouté !");
-            setDocuments([...documents, res.data]);
-        } catch (error) {
-            if (error.response?.status === 403) {
-                alert("🚫 Limite freemium atteinte ! Passez au Premium pour continuer.");
-            } else {
-                alert("Erreur lors de l'upload du document !");
-            }
+            alert("Document ajouté avec succès !");
+            onUpload();
+            setTitle("");
+            setContent("");
+            setFile(null);
+        } catch (err) {
+            console.error(err);
+            alert("Erreur lors de l’envoi du document !");
+        } finally {
+            setLoading(false);
         }
     };
+
     return (
-        <div className="doc-form-container">
-            <h2>📄 Nouveau Document</h2>
-            <form onSubmit={handleSubmit} className="doc-form">
+        <div className="form-card">
+            <h2>🧾 Ajouter ou Corriger un Document</h2>
+            <form onSubmit={handleSubmit}>
                 <input
                     type="text"
                     placeholder="Titre du document"
@@ -42,14 +50,22 @@ function DocumentForm() {
                     required
                 />
 
+                <textarea
+                    placeholder="Contenu du document (optionnel)"
+                    value={content}
+                    onChange={(e) => setContent(e.target.value)}
+                />
+
                 <input
                     type="file"
-                    accept="application/pdf"
+                    accept=".pdf,.docx,.jpg,.png"
                     onChange={(e) => setFile(e.target.files[0])}
                     required
                 />
 
-                <button type="submit">📤 Créer le document</button>
+                <button type="submit" disabled={loading}>
+                    {loading ? "Analyse et envoi..." : "📤 Envoyer"}
+                </button>
             </form>
         </div>
     );

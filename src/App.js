@@ -7,6 +7,7 @@ import Home from "./components/Home";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
+import Premium from "./components/Premium";
 import Success from "./components/Success";
 import Cancel from "./components/Cancel";
 
@@ -21,6 +22,7 @@ function AppRoutes() {
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/login" />} />
+                <Route path="/premium" element={<Premium />} />
                 <Route path="/success" element={<Success />} />
                 <Route path="/cancel" element={<Cancel />} />
             </Routes>

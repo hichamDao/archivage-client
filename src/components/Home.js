@@ -6,7 +6,7 @@ function Home() {
     const navigate = useNavigate();
 
     return (
-        <div className=bb"home-container">
+        <div className="home-container">
             <header className="hero-section">
                 <div className="overlay">
                     <h1 className="hero-title">Archivage Intelligent</h1>
